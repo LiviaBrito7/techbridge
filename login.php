@@ -1,22 +1,43 @@
+<?php
+require_once("db.php");
+session_start();
+?>
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Login</title>
+    <title>Tech Bridge</title>
     <link rel="stylesheet" href="style2.css">
 </head>
-
 <body>
-    <form method="POST" action="verifica_login.php">
-        <label for="login">Login:</label>
-        <input type="text" name="login" id="login" required><br>
-        <label for="senha">Senha:</label>
-        <input type="password" name="senha" id="senha" required><br>
-        <input type="submit" value="Entrar" id="submitBtn">
-    </form>
-    <a href='index.php'>Voltar</a>
+    
 </body>
-
 </html>
+<?php
+$email = $_POST['login'];
+$senha = $_POST['senha'];
+
+$_SESSION['Logado'] = array();
+array_push($_SESSION['Logado'], $email);
+
+// Verifica se o usuário existe em ambas as tabelas
+$sql = "SELECT * FROM contract WHERE email = '$email' AND senha = '$senha'";
+$result_user = mysqli_query($con, $sql);
+
+$sql = "SELECT * FROM provider WHERE email = '$email' AND senha = '$senha'";
+$result_provider = mysqli_query($con, $sql);
+
+if (mysqli_num_rows($result_user) > 0 || mysqli_num_rows($result_provider) > 0) {
+    echo "Login bem-sucedido!"; // Usuário encontrado em uma das tabelas
+    header("Location: home.php");
+    exit(); // Termina a execução do script para evitar execução adicional
+} else {
+    echo '<div class="error-message">Usuário ou senha incorretos.</div>';
+    header("Refresh: 2; url=login.html");
+    exit;
+}
+
+// Fecha a conexão
+mysqli_close($con);
+?>

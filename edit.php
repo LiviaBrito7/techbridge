@@ -2,10 +2,10 @@
 require_once("db.php");
 session_start();
 
-// Assuming the email is stored in $_SESSION['Logado'][0]
+// Email está guardado na $_SESSION['Logado'][0]
 $email = $_SESSION['Logado'][0];
 
-// Fetch user data
+// Fazer a query
 $sql = "SELECT * FROM provider WHERE email = '$email'";
 $result = mysqli_query($con, $sql);
 
@@ -16,7 +16,6 @@ if (mysqli_num_rows($result) > 0) {
     exit;
 }
 
-// Close connection
 mysqli_close($con);
 ?>
 <!DOCTYPE html>
@@ -58,7 +57,6 @@ mysqli_close($con);
                     <li>
                     <label for="image">Selecione uma imagem:</label>
                     <div id="imageOptions">
-                        <!-- As opções de imagem serão geradas dinamicamente aqui -->
                     </div>
                 </li>
                 <li>
@@ -69,9 +67,9 @@ mysqli_close($con);
         </form>
         <script>
     const selectedImage = '<?php echo htmlspecialchars($userData['imagem']); ?>';
-    const imageNames = ['mm.jpg', 'hm.jpg', 'mp.jpg', 'hp.jpg']; // Example image names
+    const imageNames = ['mm.jpg', 'hm.jpg', 'mp.jpg', 'hp.jpg']; // nomes das imagens
 
-    // Generate image options dynamically
+    // gerar imagens dinamicamente
     let imageOptionsHTML = '';
     imageNames.forEach((imageName, index) => {
         let checked = imageName === selectedImage ? 'checked' : '';
@@ -83,7 +81,7 @@ mysqli_close($con);
         `;
     });
 
-    // Insert the image options into the form
+    // inserir dentro do form a opção de escolher imagens
     const imageOptionsElement = document.createElement('div');
     imageOptionsElement.innerHTML = imageOptionsHTML;
     document.getElementById('imageOptions').appendChild(imageOptionsElement);

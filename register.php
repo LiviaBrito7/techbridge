@@ -6,7 +6,7 @@ require_once("db.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Bridge</title>
+    <title>TechBridge</title>
     <link rel="stylesheet" href="style2.css">
 </head>
 <body>
@@ -14,15 +14,14 @@ require_once("db.php");
 </body>
 </html>
 <?php
-echo "<a href='login.php'>Login</a><br>";
 // Recebe os dados do formulário
 $name = mysqli_real_escape_string($con, $_POST['name']);
 $email = mysqli_real_escape_string($con, $_POST['email']);
 $password = mysqli_real_escape_string($con, $_POST['password']);
-$phone = isset($_POST['phone']) ? mysqli_real_escape_string($con, $_POST['phone']) : null;
-$area = isset($_POST['area']) ? mysqli_real_escape_string($con, $_POST['area']) : null;
-$description = isset($_POST['description']) ? mysqli_real_escape_string($con, $_POST['description']) : null;
-$image = isset($_POST['image']) ? mysqli_real_escape_string($con, $_POST['image']) : null;
+$phone = isset($_POST['phone'])? mysqli_real_escape_string($con, $_POST['phone']) : null;
+$area = isset($_POST['area'])? mysqli_real_escape_string($con, $_POST['area']) : null;
+$description = isset($_POST['description'])? mysqli_real_escape_string($con, $_POST['description']) : null;
+$image = isset($_POST['image'])? mysqli_real_escape_string($con, $_POST['image']) : null;
 $table = mysqli_real_escape_string($con, $_POST['table']);
 
 // Verifica se a tabela existe, caso contrário, cria
@@ -32,9 +31,9 @@ $tableExists = $result && mysqli_num_rows($result) > 0;
 if (!$tableExists) {
     $sql = "CREATE TABLE $table (nome varchar(255) not null, email varchar(255) not null, senha varchar(255) not null";
     if ($table === 'provider') {
-        $sql .= ", telefone varchar(15) not null, area varchar(255) not null, descricao varchar(255) not null, imagem varchar(20), notas int DEFAULT 0, num_avaliacoes int DEFAULT 0";
+        $sql.= ", telefone varchar(15) not null, area varchar(255) not null, descricao varchar(255) not null, imagem varchar(20), notas int DEFAULT 0, num_avaliacoes int DEFAULT 0";
     }
-    $sql .= ")";
+    $sql.= ")";
     mysqli_query($con, $sql);
 }
 
@@ -47,41 +46,25 @@ if ($row[0] == 0) {
     // Prepara os valores para inserção
     $values = "('$name', '$email', '$password'";
     if ($table === 'provider') {
-        $values .= ", '$phone', '$area', '$description', '$image'";
+        $values.= ", '$phone', '$area', '$description', '$image'";
     }
-    $values .= ")";
+    $values.= ")";
 
     // Insere os dados na tabela
     $sql = "INSERT INTO $table (nome, email, senha";
     if ($table === 'provider') {
-        $sql .= ", telefone, area, descricao, imagem";
+        $sql.= ", telefone, area, descricao, imagem";
     }
-    $sql .= ") VALUES $values";
+    $sql.= ") VALUES $values";
     mysqli_query($con, $sql);
-    echo '<div class="success-message">Cadastro bem-sucedido <a href="login.php">Clique aqui para ir para login.</a></div>';
+    echo '<div class="success-message">Cadastro bem-sucedido!</div>';
+    header("Refresh: 2; url=login.html");
+    exit;
 } else {
-    echo '<div class="error-message">O registro com o email \''. $email. '\' já existe. <a href="index.php">Clique aqui para voltar ao cadastro.</a></div>';
+    echo '<div class="error-message">O registro com o email \''. $email. '\' já existe.</div>';
+    header("Refresh: 2; url=register.html");
+    exit;
 }
-
-// Exibe os dados da tabela
-// $sql = "SELECT * from $table";
-// $res = mysqli_query($con, $sql);
-// $total = mysqli_num_rows($res);
-// echo "<p>Total de Resultados no Banco de Dados: " . $total . "</p>";
-// echo "<table>";
-// echo "<tr><th> Nome </th><th> E-mail </th><th> Senha </th><th> Telefone </th><th> Área </th><th> Descrição </th></tr>";
-
-// while ($f = mysqli_fetch_array($res)) {
-//     echo "<tr>";
-//     echo "<td>{$f['nome']}</td>";
-//     echo "<td>{$f['email']}</td>";
-//     echo "<td>{$f['senha']}</td>";
-//     echo "<td>" . (isset($f['telefone']) ? $f['telefone'] : '') . "</td>";
-//     echo "<td>" . (isset($f['area']) ? $f['area'] : '') . "</td>";
-//     echo "<td>" . (isset($f['descricao']) ? $f['descricao'] : '') . "</td>";
-//     echo "</tr>";
-// }
-// echo "</table>";
 
 // Fecha a conexão
 mysqli_close($con);

@@ -6,13 +6,17 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #f0f0f0; /* Cor de fundo claro */
     color: #333; /* Cor de texto escura */
 }
 
+h1 {
+    text-align: center;
+}
+
 h1, h3 {
-    color: #007bff; /* Cor azul principal */
+    color: #5AD4C9; /* Cor azul principal */
 }
 
 form {
@@ -48,7 +52,7 @@ input[type="radio"] {
 }
 
 button {
-    background-color: #007bff; /* Cor azul principal */
+    background-color: #5AD4C9; /* Cor verde principal */
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -58,7 +62,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* Cor azul mais escura ao passar o mouse */
+    background-color: #02c3b6; /* Cor verde mais escura ao passar o mouse */
 }
 
 .fechar-btn {
@@ -78,7 +82,7 @@ button:hover {
 }
 
 a {
-    color: #007bff; /* Cor azul principal para links */
+    color: #5AD4C9; /* Cor verde principal para links */
     text-decoration: none;
 }
 
@@ -135,4 +139,7 @@ a:hover {
     border-radius: 5px;
     margin-top: 20px;
     text-align: center;
+}
+img {
+    border-radius: 50%;
 }

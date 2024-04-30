@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .modal_avaliacao {
@@ -65,7 +66,7 @@
 
 .res {
     margin-bottom: 20px;
-    padding: 15px;
+    padding: 30px 15px;
     background-color: #f0f8ff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -81,7 +82,25 @@
 }
 
 a {
-    color: #007bff; 
+    color: #5AD4C9;
     text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    background-color: #5AD4C9;
+    /* Cor verde principal */
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #02c3b6;
+    /* Cor verde mais escura ao passar o mouse */
+}
+img {
+    border-radius: 50%;
 }

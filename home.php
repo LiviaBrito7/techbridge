@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tech Bridge</title>
     <link rel="stylesheet" href="style.css">
     <script>
         function avaliacao(nome, quem) {
@@ -18,11 +18,11 @@ session_start();
             <div class="modal_content_avaliacao">
             <div>
             <p>Como você avalia ${nome}?</p>
-                <a href="salvar_avaliacao.php?avaliacao=1&quem=${quem}">⭐</a>
-                <a href="salvar_avaliacao.php?avaliacao=2&quem=${quem}">⭐</a>
-                <a href="salvar_avaliacao.php?avaliacao=3&quem=${quem}">⭐</a>
-                <a href="salvar_avaliacao.php?avaliacao=4&quem=${quem}">⭐</a>
-                <a href="salvar_avaliacao.php?avaliacao=5&quem=${quem}">⭐</a>
+                <a href="rate.php?avaliacao=1&quem=${quem}">⭐</a>
+                <a href="rate.php?avaliacao=2&quem=${quem}">⭐</a>
+                <a href="rate.php?avaliacao=3&quem=${quem}">⭐</a>
+                <a href="rate.php?avaliacao=4&quem=${quem}">⭐</a>
+                <a href="rate.php?avaliacao=5&quem=${quem}">⭐</a>
             </div>
             </div>
             <button class="fechar-btn">x</button>
@@ -50,7 +50,7 @@ session_start();
 </head>
 
 <body>
-    <a href="login.php">Login</a>
+    <a href="login.html">Login</a>
     <div id="avaliacao"></div>
 
 

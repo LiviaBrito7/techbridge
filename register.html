@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Bridge</title>
+    <title>TechBridge</title>
     <link rel="stylesheet" href="style2.css">
 </head>
 <body>
+    <a href='index.html'>Voltar</a>
     <h1>Bem vindo a Tech Bridge</h1>
 
 <form id="form">
@@ -16,7 +17,7 @@
         <li><input type="radio" name="modality" value="provider">Prestador de serviço à pessoa com deficiência</li>
     </ul>
     <button id="btn-salvar" type="submit">Quero me cadastrar</button>
-    <a href="login.php">Já tenho conta!</a>
+    <a href="login.html">Já tenho conta!</a>
 </form>
 <section id="contract"></section>
 <section id="provider"></section>
@@ -61,7 +62,7 @@ function generateForm(userType) {
                         <textarea id="description" name="description" rows="4" required></textarea>
                     </li>
                     <li>
-                    <label for="image">Selecione uma imagem:</label>
+                    <label for="image">Selecione um avatar:</label>
                     <div id="imageOptions">
                         <!-- As opções de imagem serão geradas dinamicamente aqui -->
                     </div>
@@ -73,7 +74,7 @@ function generateForm(userType) {
                 </li>
             </ul>
             <button class="fechar-btn">x</button>
-            <a href="login.php">Já tenho conta!</a>
+            <a href="login.html">Já tenho conta!</a>
         </form>
     `;
 

@@ -11,15 +11,12 @@ if (!$link) {
 }
 $sql = 'CREATE DATABASE IF NOT EXISTS ' . $db;
 mysqli_query($link, $sql);
-// if (mysqli_query($link, $sql)) {
-//   echo $db . " created successfully\n";
-// }
 
 // conexão e seleção do banco de dados
 // Cria a conexão
 $con = mysqli_connect($host, $user, $pass, $db);
 
-// Check connection
+// Checar conexão
 if (!$con) {
   die("Connection failed: " . mysqli_connect_error());
 }
