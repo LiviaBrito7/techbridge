@@ -28,18 +28,18 @@ session_start();
             <button class="fechar-btn">x</button>
         </div>
     `;
-            // Get the modal
+            // Pegar modal
             var modal = document.getElementById("myModal");
 
-            // Show the modal
+            // Mostrar modal
             modal.style.display = "flex";
 
-            // Add an event listener to the close button
+            // Ouvidor de evento ao clicar no botao fechar
             document.querySelector('.fechar-btn').addEventListener('click', function() {
                 modal.style.display = "none";
             });
 
-            // When the user clicks anywhere outside of the modal, close it
+            // Fechar quando o usuario clica fora
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
@@ -56,11 +56,6 @@ session_start();
 
     <div class="container">
         <?php
-
-
-        if (!$con) {
-            die("Erro na conexão com o banco de dados: " . mysqli_connect_error());
-        }
 
         $sql = "SELECT * FROM provider";
         $res = mysqli_query($con, $sql);

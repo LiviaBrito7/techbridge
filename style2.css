@@ -120,3 +120,19 @@ a:hover {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.success-message {
+    background-color: #dff0d8; /* Cor de fundo verde claro */
+    color: #3c763d; /* Cor de texto verde escuro */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+}
+.error-message {
+    background-color: #f2dede; /* Cor de fundo vermelho claro */
+    color: #a94442; /* Cor de texto vermelho escuro */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+}
