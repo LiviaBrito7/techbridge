@@ -5,11 +5,6 @@ session_start();
 // Assuming the email is stored in $_SESSION['Logado'][0]
 $email = $_SESSION['Logado'][0];
 
-// Check connection
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
 // Fetch user data
 $sql = "SELECT * FROM provider WHERE email = '$email'";
 $result = mysqli_query($con, $sql);

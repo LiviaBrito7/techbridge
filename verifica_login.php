@@ -1,18 +1,25 @@
 <?php
 require_once("db.php");
 session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Bridge</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    
+</body>
+</html>
+<?php
 $email = $_POST['login'];
 $senha = $_POST['senha'];
 
 $_SESSION['Logado'] = array();
 array_push($_SESSION['Logado'], $email);
-array_push($_SESSION['Logado'], $senha);
-
-var_dump($_SESSION);
-
-if (!$con) {
-    die("Erro na conexão com o banco de dados: " . mysqli_connect_error());
-}
 
 // Verifica se o usuário existe em ambas as tabelas
 $sql = "SELECT * FROM contract WHERE email = '$email' AND senha = '$senha'";
@@ -26,8 +33,7 @@ if (mysqli_num_rows($result_user) > 0 || mysqli_num_rows($result_provider) > 0) 
     header("Location: home.php");
     exit(); // Termina a execução do script para evitar execução adicional
 } else {
-    echo "Usuário ou senha incorretos."; // Usuário não encontrado
-    echo "<a href='login.php'>Voltar para login</a>";
+    echo '<div class="error-message">Usuário ou senha incorretos. <a href="login.php">Clique aqui para voltar para login.</a></div>';
 }
 
 // Fecha a conexão

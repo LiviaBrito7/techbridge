@@ -1,5 +1,19 @@
 <?php
 require_once("db.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Bridge</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    
+</body>
+</html>
+<?php
 echo "<a href='login.php'>Login</a><br>";
 // Recebe os dados do formulário
 $name = mysqli_real_escape_string($con, $_POST['name']);
@@ -44,31 +58,30 @@ if ($row[0] == 0) {
     }
     $sql .= ") VALUES $values";
     mysqli_query($con, $sql);
-    header("Location: login.php");
-    exit(); // Termina a execução do script para evitar execução adicional
+    echo '<div class="success-message">Cadastro bem-sucedido <a href="login.php">Clique aqui para ir para login.</a></div>';
 } else {
-    echo "O registro com o email '$email' já existe.";
+    echo '<div class="error-message">O registro com o email \''. $email. '\' já existe. <a href="index.php">Clique aqui para voltar ao cadastro.</a></div>';
 }
 
 // Exibe os dados da tabela
-$sql = "SELECT * from $table";
-$res = mysqli_query($con, $sql);
-$total = mysqli_num_rows($res);
-echo "<p>Total de Resultados no Banco de Dados: " . $total . "</p>";
-echo "<table>";
-echo "<tr><th> Nome </th><th> E-mail </th><th> Senha </th><th> Telefone </th><th> Área </th><th> Descrição </th></tr>";
+// $sql = "SELECT * from $table";
+// $res = mysqli_query($con, $sql);
+// $total = mysqli_num_rows($res);
+// echo "<p>Total de Resultados no Banco de Dados: " . $total . "</p>";
+// echo "<table>";
+// echo "<tr><th> Nome </th><th> E-mail </th><th> Senha </th><th> Telefone </th><th> Área </th><th> Descrição </th></tr>";
 
-while ($f = mysqli_fetch_array($res)) {
-    echo "<tr>";
-    echo "<td>{$f['nome']}</td>";
-    echo "<td>{$f['email']}</td>";
-    echo "<td>{$f['senha']}</td>";
-    echo "<td>" . (isset($f['telefone']) ? $f['telefone'] : '') . "</td>";
-    echo "<td>" . (isset($f['area']) ? $f['area'] : '') . "</td>";
-    echo "<td>" . (isset($f['descricao']) ? $f['descricao'] : '') . "</td>";
-    echo "</tr>";
-}
-echo "</table>";
+// while ($f = mysqli_fetch_array($res)) {
+//     echo "<tr>";
+//     echo "<td>{$f['nome']}</td>";
+//     echo "<td>{$f['email']}</td>";
+//     echo "<td>{$f['senha']}</td>";
+//     echo "<td>" . (isset($f['telefone']) ? $f['telefone'] : '') . "</td>";
+//     echo "<td>" . (isset($f['area']) ? $f['area'] : '') . "</td>";
+//     echo "<td>" . (isset($f['descricao']) ? $f['descricao'] : '') . "</td>";
+//     echo "</tr>";
+// }
+// echo "</table>";
 
 // Fecha a conexão
 mysqli_close($con);
