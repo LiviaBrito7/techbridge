@@ -97,7 +97,7 @@
                 </li>
             </ul>
             <button class="fechar-btn">x</button>
-            <a href="login.html">Já tenho conta!</a>
+            <a href="login.php">Já tenho conta!</a>
         </form>
     `;
 
