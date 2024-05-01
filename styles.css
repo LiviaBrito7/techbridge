@@ -8,8 +8,7 @@ body {
 }
 
 .logo {
-    width: 40px;
-    scale: 190%;
+    width: 76px;
     margin-left: 2rem;
 }
 
@@ -19,8 +18,13 @@ main {
 
 nav {
     height: 80px;
-    display: flex;
     align-items: center;
+    background-color: #FFFFFF;
+    justify-content: space-between;
+}
+
+.teste{
+    display: flex;
 }
 
 .btn-screen1 {
@@ -62,8 +66,14 @@ nav {
 }
 
 .arvore {
-    margin-top: 150px;
-    margin-left: 130px;
-    width: 130rem;
+    width: 140rem;
     opacity: 70%;
+}
+
+.dFlex {
+    display: flex;
+}
+
+.image {
+    align-content: end;
 }

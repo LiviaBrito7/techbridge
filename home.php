@@ -20,11 +20,11 @@ session_start();
             <div class="modal_content_avaliacao">
             <div>
             <p>Como você avalia ${nome}?</p>
-                <a href="rate.php?avaliacao=1&quem=${quem}">⭐</a>
-                <a href="rate.php?avaliacao=2&quem=${quem}">⭐</a>
-                <a href="rate.php?avaliacao=3&quem=${quem}">⭐</a>
-                <a href="rate.php?avaliacao=4&quem=${quem}">⭐</a>
-                <a href="rate.php?avaliacao=5&quem=${quem}">⭐</a>
+                <a href="rate.php?avaliacao=1&quem=${quem}">💛</a>
+                <a href="rate.php?avaliacao=2&quem=${quem}">💛</a>
+                <a href="rate.php?avaliacao=3&quem=${quem}">💛</a>
+                <a href="rate.php?avaliacao=4&quem=${quem}">💛</a>
+                <a href="rate.php?avaliacao=5&quem=${quem}">💛</a>
             </div>
             </div>
             <button class="fechar-btn">x</button>
@@ -81,6 +81,7 @@ session_start();
 
             while ($f = mysqli_fetch_assoc($res)) {
                 $media = $f['num_avaliacoes'] ? round($f['notas'] / $f['num_avaliacoes']) : 0;
+                $mediaComplemento = 5 - $media;
                 echo "<div class='res'>";
                 echo "<div style='float:left; width:80%'>";
                 echo "<p>Nome: {$f['nome']}</p>";
@@ -89,7 +90,10 @@ session_start();
                 echo "<p>Área de Atuação: {$f['area']}</p>";
                 echo "<p>Descrição: {$f['descricao']}</p>";
                 for ($i = 0; $i < $media; $i++) {
-                    echo "⭐";
+                    echo "💛";
+                }
+                for ($i = 0; $i < $mediaComplemento; $i++) {
+                    echo "🤍";
                 }
                 echo "<button onclick='avaliacao(\"" . htmlspecialchars($f['nome'], ENT_QUOTES) . "\", \"" . htmlspecialchars($f['email'], ENT_QUOTES) . "\")'>Avaliar</button>";
                 echo "</div>";
