@@ -10,6 +10,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Bridge</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style2.css">
+
     <script>
         function avaliacao(nome, quem) {
             document.getElementById('avaliacao').innerHTML = `
@@ -50,46 +52,72 @@ session_start();
 </head>
 
 <body>
-    <a href="login.html">Login</a>
+    <?php
+    if (isset($_GET['error'])) {
+        $errorMessage = urldecode($_GET['error']);
+        echo "<div class='error-message' id='error-message'>$errorMessage</div>";
+    }
+    if (isset($_GET['success'])) {
+        $success = urldecode($_GET['success']);
+        echo "<div class='success-message' id='success-message'>$success</div>";
+    }
+    ?>
+    <a href="login.php">Login</a>
     <div id="avaliacao"></div>
 
 
     <div class="container">
         <?php
 
-        $sql = "SELECT * FROM provider";
-        $res = mysqli_query($con, $sql);
+        $provider = mysqli_query($con, "SHOW TABLES LIKE 'provider'");
+        $providerExists = $provider && mysqli_num_rows($provider) > 0;
 
-        echo "<p>Total de Resultados no Banco de Dados: " . mysqli_num_rows($res) . "</p>";
-         
-        while ($f = mysqli_fetch_assoc($res)) {
-            $media = $f['num_avaliacoes'] ? round($f['notas'] / $f['num_avaliacoes']) : 0;
-            echo "<div class='res'>";
-            echo "<div style='float:left; width:80%'>";
-            echo "<p>Nome: {$f['nome']}</p>";
-            echo "<p>E-mail: {$f['email']}</p>";
-            echo "<p>Telefone: {$f['telefone']}</p>";
-            echo "<p>Área de Atuação: {$f['area']}</p>";
-            echo "<p>Descrição: {$f['descricao']}</p>";
-            for ($i=0; $i < $media; $i++) { 
-                echo "⭐";
+        if ($providerExists) {
+
+            $sql = "SELECT * FROM provider";
+            $res = mysqli_query($con, $sql);
+
+            echo "<p>Total de Resultados no Banco de Dados: " . mysqli_num_rows($res) . "</p>";
+
+            while ($f = mysqli_fetch_assoc($res)) {
+                $media = $f['num_avaliacoes'] ? round($f['notas'] / $f['num_avaliacoes']) : 0;
+                echo "<div class='res'>";
+                echo "<div style='float:left; width:80%'>";
+                echo "<p>Nome: {$f['nome']}</p>";
+                echo "<p>E-mail: {$f['email']}</p>";
+                echo "<p>Telefone: {$f['telefone']}</p>";
+                echo "<p>Área de Atuação: {$f['area']}</p>";
+                echo "<p>Descrição: {$f['descricao']}</p>";
+                for ($i = 0; $i < $media; $i++) {
+                    echo "⭐";
+                }
+                echo "<button onclick='avaliacao(\"" . htmlspecialchars($f['nome'], ENT_QUOTES) . "\", \"" . htmlspecialchars($f['email'], ENT_QUOTES) . "\")'>Avaliar</button>";
+                echo "</div>";
+                echo "<div>";
+                if ($f['email'] == $_SESSION['Logado'][0]) {
+                    echo "<a href='edit.php'>Editar Infos</a>";
+                }
+                echo "<img src='img/{$f['imagem']}' width='100px' height='100px'>";
+                echo "</div>";
+                echo "</div>";
             }
-            echo "<button onclick='avaliacao(\"" . htmlspecialchars($f['nome'], ENT_QUOTES) . "\", \"" . htmlspecialchars($f['email'], ENT_QUOTES) . "\")'>Avaliar</button>";
-            echo "</div>";
-            echo "<div>";
-            if ($f['email'] == $_SESSION['Logado'][0]) {
-                echo "<a href='edit.php'>Editar Infos</a>";
-            }
-            echo "<img src='img/{$f['imagem']}' width='100px' height='100px'>";
-            echo "</div>";
-            echo "</div>";
+        } else {
+            echo 'Ainda não há prestadores cadastrados.';
         }
 
         mysqli_close($con);
         ?>
 
     </div>
-
+    <script>
+        // Aguarda 2 segundos (2000 milissegundos) antes de ocultar a div
+        setTimeout(function() {
+            document.getElementById('error-message').style.display = 'none';
+        }, 2000);
+        setTimeout(function() {
+            document.getElementById('success-message').style.display = 'none';
+        }, 2000);
+    </script>
 </body>
 
 </html>

@@ -1,71 +1,127 @@
-<?php
-require_once("db.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechBridge</title>
     <link rel="stylesheet" href="style2.css">
 </head>
+
 <body>
-    
+    <?php
+    if (isset($_GET['error'])) {
+        $errorMessage = urldecode($_GET['error']);
+        echo "<div class='error-message' id='error-message'>$errorMessage</div>";
+    }
+    ?>
+    <a href='index.html'>Voltar</a>
+    <h1>Bem vindo a Tech Bridge</h1>
+
+    <form id="form">
+        <h3>Você é:</h3>
+        <ul>
+            <li><input type="radio" name="modality" value="contract" checked>Estou buscando serviço à pessoa com deficiência</li>
+            <li><input type="radio" name="modality" value="provider">Prestador de serviço à pessoa com deficiência</li>
+        </ul>
+        <button id="btn-salvar" type="submit">Quero me cadastrar</button>
+        <a href="login.php">Já tenho conta!</a>
+    </form>
+    <section id="contract"></section>
+    <section id="provider"></section>
+    <script>
+        'use strict';
+
+        document.querySelector('#btn-salvar').addEventListener('click', function(event) {
+            event.preventDefault();
+            const userType = document.querySelector('#form').modality.value;
+            generateForm(userType);
+        });
+
+        function generateForm(userType) {
+            const sectionElement = document.querySelector(`#${userType}`);
+            const formContent = `
+        <form class="modal" action="action-register.php" method="post">
+            <ul class="center">
+                <h1>Cadastrar Usuário ${userType === 'provider' ? 'Prestador de Serviço' : 'Contratante'}</h1>
+                <li>
+                    <label for="nome">Nome:</label>
+                    <input type="text" name="name" id="name" required>
+                </li>
+                <li>
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" required>
+                </li>
+                <li>
+                    <label for="senha">Senha:</label>
+                    <input type="password" name="password" id="password" required>
+                </li>
+                ${userType === 'provider' ? `
+                    <li>
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="phone" name="phone">
+                    </li>
+                    <li>
+                        <label for="area">Área de atuação:</label>
+                        <input type="text" id="area" name="area">
+                    </li>
+                    <li>
+                        <label for="descricao">Mensagem:</label>
+                        <textarea id="description" name="description" rows="4" required></textarea>
+                    </li>
+                    <li>
+                    <label for="image">Selecione um avatar:</label>
+                    <div id="imageOptions">
+                        <!-- As opções de imagem serão geradas dinamicamente aqui -->
+                    </div>
+                </li>
+                ` : ''}
+                <li>
+                    <input type="hidden" name="table" value="${userType}" />
+                    <button type="submit">Enviar</button>
+                </li>
+            </ul>
+            <button class="fechar-btn">x</button>
+            <a href="login.html">Já tenho conta!</a>
+        </form>
+    `;
+
+            sectionElement.innerHTML = formContent;
+            sectionElement.style.display = 'flex';
+
+            const imageNames = ['mm.jpg', 'hm.jpg', 'mp.jpg', 'hp.jpg']; // Exemplo de nomes de arquivos
+
+            // Gerar opções de imagem dinamicamente
+            let imageOptionsHTML = '';
+            imageNames.forEach((imageName, index) => {
+                imageOptionsHTML += `
+        <input type="radio" id="image${index}" name="image" value="${imageName}" required>
+        <label for="image${index}">
+            <img src="img/${imageName}" alt="Imagem ${index + 1}" style="width: 50px; height: auto;">
+        </label>
+    `;
+            });
+
+            // Inserir as opções de imagem no formulário
+            const imageOptionsElement = document.createElement('div');
+            imageOptionsElement.innerHTML = imageOptionsHTML;
+            document.getElementById('imageOptions').appendChild(imageOptionsElement);
+
+        }
+
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('fechar-btn')) {
+                let sectionElement = event.target.closest('section');
+                if (sectionElement) {
+                    sectionElement.style.display = 'none';
+                }
+            }
+        });
+        // Aguarda 2 segundos (2000 milissegundos) antes de ocultar a div
+        setTimeout(function() {
+            document.getElementById('error-message').style.display = 'none';
+        }, 2000);
+    </script>
 </body>
+
 </html>
-<?php
-// Recebe os dados do formulário
-$name = mysqli_real_escape_string($con, $_POST['name']);
-$email = mysqli_real_escape_string($con, $_POST['email']);
-$password = mysqli_real_escape_string($con, $_POST['password']);
-$phone = isset($_POST['phone'])? mysqli_real_escape_string($con, $_POST['phone']) : null;
-$area = isset($_POST['area'])? mysqli_real_escape_string($con, $_POST['area']) : null;
-$description = isset($_POST['description'])? mysqli_real_escape_string($con, $_POST['description']) : null;
-$image = isset($_POST['image'])? mysqli_real_escape_string($con, $_POST['image']) : null;
-$table = mysqli_real_escape_string($con, $_POST['table']);
-
-// Verifica se a tabela existe, caso contrário, cria
-$result = mysqli_query($con, "SHOW TABLES LIKE '$table'");
-$tableExists = $result && mysqli_num_rows($result) > 0;
-
-if (!$tableExists) {
-    $sql = "CREATE TABLE $table (nome varchar(255) not null, email varchar(255) not null, senha varchar(255) not null";
-    if ($table === 'provider') {
-        $sql.= ", telefone varchar(15) not null, area varchar(255) not null, descricao varchar(255) not null, imagem varchar(20), notas int DEFAULT 0, num_avaliacoes int DEFAULT 0";
-    }
-    $sql.= ")";
-    mysqli_query($con, $sql);
-}
-
-// Verifica se o email já existe na tabela
-$check_sql = "SELECT COUNT(*) FROM $table WHERE email = '$email'";
-$result2 = mysqli_query($con, $check_sql);
-$row = mysqli_fetch_array($result2);
-
-if ($row[0] == 0) {
-    // Prepara os valores para inserção
-    $values = "('$name', '$email', '$password'";
-    if ($table === 'provider') {
-        $values.= ", '$phone', '$area', '$description', '$image'";
-    }
-    $values.= ")";
-
-    // Insere os dados na tabela
-    $sql = "INSERT INTO $table (nome, email, senha";
-    if ($table === 'provider') {
-        $sql.= ", telefone, area, descricao, imagem";
-    }
-    $sql.= ") VALUES $values";
-    mysqli_query($con, $sql);
-    echo '<div class="success-message">Cadastro bem-sucedido!</div>';
-    header("Refresh: 2; url=login.html");
-    exit;
-} else {
-    echo '<div class="error-message">O registro com o email \''. $email. '\' já existe.</div>';
-    header("Refresh: 2; url=register.html");
-    exit;
-}
-
-// Fecha a conexão
-mysqli_close($con);
-?>

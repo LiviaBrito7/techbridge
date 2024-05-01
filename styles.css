@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -6,16 +6,18 @@ body{
     overflow: hidden;
     position: fixed;
 }
+
 .logo {
     width: 40px;
     scale: 190%;
     margin-left: 2rem;
 }
 
-main{
+main {
     background-color: #f5fbf7f3;
 }
-nav{
+
+nav {
     height: 80px;
     display: flex;
     align-items: center;
@@ -34,14 +36,14 @@ nav{
     margin-right: 1rem;
 }
 
-.btn-screen1:hover{
+.btn-screen1:hover {
     background-color: white;
     color: #5AD4C9;
     transition: 0.6s;
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.1);
 }
 
-.description-screen1{
+.description-screen1 {
     font-size: 2rem;
     background-color: white;
     font-family: 'Roboto';
@@ -51,6 +53,7 @@ nav{
     color: #006a63;
 
 }
+
 .container-screen1 {
     display: flex;
     justify-content: center;
@@ -58,7 +61,7 @@ nav{
     height: 100vh;
 }
 
-.arvore{
+.arvore {
     margin-top: 150px;
     margin-left: 130px;
     width: 130rem;

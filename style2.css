@@ -7,23 +7,29 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f0f0f0; /* Cor de fundo claro */
-    color: #333; /* Cor de texto escura */
+    background-color: #f0f0f0;
+    /* Cor de fundo claro */
+    color: #333;
+    /* Cor de texto escura */
 }
 
 h1 {
     text-align: center;
+    margin-top: 20px;
 }
 
-h1, h3 {
-    color: #5AD4C9; /* Cor azul principal */
+h1,
+h3 {
+    color: #5AD4C9;
+    /* Cor azul principal */
 }
 
 form {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff; /* Cor de fundo branco para o formulário */
+    background-color: #fff;
+    /* Cor de fundo branco para o formulário */
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -52,7 +58,8 @@ input[type="radio"] {
 }
 
 button {
-    background-color: #5AD4C9; /* Cor verde principal */
+    background-color: #5AD4C9;
+    /* Cor verde principal */
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -62,14 +69,16 @@ button {
 }
 
 button:hover {
-    background-color: #02c3b6; /* Cor verde mais escura ao passar o mouse */
+    background-color: #02c3b6;
+    /* Cor verde mais escura ao passar o mouse */
 }
 
 .fechar-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #dc3545; /* Cor vermelha para o botão de fechar */
+    background-color: #dc3545;
+    /* Cor vermelha para o botão de fechar */
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -78,11 +87,13 @@ button:hover {
 }
 
 .fechar-btn:hover {
-    background-color: #c82333; /* Cor vermelha mais escura ao passar o mouse */
+    background-color: #c82333;
+    /* Cor vermelha mais escura ao passar o mouse */
 }
 
 a {
-    color: #5AD4C9; /* Cor verde principal para links */
+    color: #5AD4C9;
+    /* Cor verde principal para links */
     text-decoration: none;
 }
 
@@ -124,22 +135,33 @@ a:hover {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .success-message {
-    background-color: #dff0d8; /* Cor de fundo verde claro */
-    color: #3c763d; /* Cor de texto verde escuro */
+    background-color: #dff0d8;
+    /* Cor de fundo verde claro */
+    color: #3c763d;
+    /* Cor de texto verde escuro */
     padding: 10px;
     border-radius: 5px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     text-align: center;
+    width: 100%;
+    position: absolute;
 }
+
 .error-message {
-    background-color: #f2dede; /* Cor de fundo vermelho claro */
-    color: #a94442; /* Cor de texto vermelho escuro */
+    background-color: #f2dede;
+    /* Cor de fundo vermelho claro */
+    color: #a94442;
+    /* Cor de texto vermelho escuro */
     padding: 10px;
     border-radius: 5px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     text-align: center;
+    width: 100%;
+    position: absolute;
 }
+
 img {
     border-radius: 50%;
 }

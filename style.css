@@ -33,7 +33,7 @@
     text-align: center;
 }
 
-.modal_content_avaliacao a {
+.modal_content_avaliacao a:hover {
     text-decoration: none;
 }
 
@@ -72,6 +72,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.res button {
+    padding: 5px 10px;
+}
+
 .container {
     max-width: 600px;
     margin: 20px auto;
@@ -101,6 +105,7 @@ button:hover {
     background-color: #02c3b6;
     /* Cor verde mais escura ao passar o mouse */
 }
+
 img {
     border-radius: 50%;
 }
